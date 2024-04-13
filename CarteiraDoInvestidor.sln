@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteiraDoInvestidor.CrossC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteiraDoInvestidor.Repository", "CarteiraDoInvestidor.Repository\CarteiraDoInvestidor.Repository.csproj", "{72DAF456-2D44-4338-86A4-4CBB20F9A977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteiraDoInvestidor.Application", "CarteiraDoInvestidor.Application\CarteiraDoInvestidor.Application.csproj", "{0BEBBAE7-1D10-44BC-BC2A-5E40F4E7B74C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteiraDoInvestidor.Application", "CarteiraDoInvestidor.Application\CarteiraDoInvestidor.Application.csproj", "{0BEBBAE7-1D10-44BC-BC2A-5E40F4E7B74C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteiraDoInvestidor.Api", "CarteiraDoInvestidor.Api\CarteiraDoInvestidor.Api.csproj", "{2FFDA220-6179-45AD-885E-8E2132FE9165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarteiraDoInvestidor.Api", "CarteiraDoInvestidor.Api\CarteiraDoInvestidor.Api.csproj", "{2FFDA220-6179-45AD-885E-8E2132FE9165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarteiraDoInvestidor.Test", "CarteiraDoInvestidor.Test\CarteiraDoInvestidor.Test.csproj", "{9AA15EBD-D767-4886-94C9-653C2777AC54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2FFDA220-6179-45AD-885E-8E2132FE9165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFDA220-6179-45AD-885E-8E2132FE9165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFDA220-6179-45AD-885E-8E2132FE9165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA15EBD-D767-4886-94C9-653C2777AC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA15EBD-D767-4886-94C9-653C2777AC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA15EBD-D767-4886-94C9-653C2777AC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA15EBD-D767-4886-94C9-653C2777AC54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

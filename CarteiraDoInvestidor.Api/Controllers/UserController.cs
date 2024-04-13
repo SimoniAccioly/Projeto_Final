@@ -58,5 +58,33 @@ namespace CarteiraDoInvestidor.Api.Controllers
             return Ok(result);
 
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Atualizar(Guid id, UsuarioDto dto)
+        {
+            if (id != dto.Id)
+                return BadRequest();
+
+            var result = this._usuarioService.Atualizar(dto);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(Guid id)
+        {
+            var usuario = _usuarioService.Obter(id);
+
+            if (usuario == null)
+                return NotFound();
+
+            _usuarioService.Deletar(id);
+
+            return NoContent();
+        }
     }
 }
+

@@ -62,5 +62,28 @@ namespace CarteiraDoInvestidor.Application.Conta
             var result = this.Mapper.Map<UsuarioDto>(usuario);
             return result;
         }
+
+        public UsuarioDto Atualizar(UsuarioDto dto)
+        {
+            var usuarioExistente = UsuarioRepository.GetById(dto.Id);
+            if (usuarioExistente == null)
+                return null;
+
+            Mapper.Map(dto, usuarioExistente);
+
+            UsuarioRepository.Update(usuarioExistente);
+
+            // Mapeia a entidade atualizada de volta para o DTO
+            return Mapper.Map<UsuarioDto>(usuarioExistente);
+        }
+
+        public void Deletar(Guid id)
+        {
+            var usuarioExistente = UsuarioRepository.GetById(id);
+            if (usuarioExistente == null)
+                return; // Ou lançar uma exceção, dependendo do comportamento desejado
+
+            UsuarioRepository.Delete(usuarioExistente);
+        }
     }
 }
