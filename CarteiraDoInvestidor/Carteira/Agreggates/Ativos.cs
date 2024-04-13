@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarteiraDoInvestidor.Domain.Carteira.Agreggates
 {
+    //encapsulamento
     public class Ativos : Entity<Guid>
     {
         public string Papel { get; set; }
@@ -16,10 +17,12 @@ namespace CarteiraDoInvestidor.Domain.Carteira.Agreggates
         public double TaxaDeCorretagem { get; set; }
         public DateTime DataDaCompra { get; set; }
         public string LadoDaOperacao { get; set; }
-        public virtual IList<Carteiras> Carteiras { get; set; } = new List<Carteiras>();
+
+        //Api Collections (List <T>)
+        
 
 
-        public class AtivosManager
+       /* public class AtivosManager
         {
             private List<Ativos> listaDeAtivos;
 
@@ -53,8 +56,8 @@ namespace CarteiraDoInvestidor.Domain.Carteira.Agreggates
                         ativo.PrecoMedio = novoPrecoMedio;
                     }
                 }
-            }
+            }*/
 
         }
     }
-}
+

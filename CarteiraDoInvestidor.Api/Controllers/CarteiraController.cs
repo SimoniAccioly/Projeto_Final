@@ -2,6 +2,7 @@
 using CarteiraDoInvestidor.Application.Investimentos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CarteiraDoInvestidor.Application.Conta;
 
 namespace CarteiraDoInvestidor.Api.Controllers
 {
@@ -10,23 +11,22 @@ namespace CarteiraDoInvestidor.Api.Controllers
     public class CarteiraController : ControllerBase
     {
         private readonly CarteiraService _carteiraService;
+        private readonly UsuarioService _usuarioService;
 
         public CarteiraController(CarteiraService carteiraService)
         {
             _carteiraService = carteiraService;
         }
 
-       /* [HttpGet]
-        public IActionResult GetCarteiras()
+        [HttpPost]
+        public IActionResult CriarCarteira([FromBody] CarteirasDto carteiraDto)
         {
-            var result = this._carteiraService.ObterCarteiraseAtivos(Guid carteiraId);
+            var novaCarteira = _carteiraService.Criar(carteiraDto);
+            return Ok(novaCarteira);
+        }
 
-            return Ok(result);
-        }*/
-
-        // GET: api/Carteira/{carteiraId}
         [HttpGet("{carteiraId}")]
-        public ActionResult<CarteirasDto> ObterCarteiraPorId(Guid carteiraId)
+        public IActionResult ObterCarteira(Guid carteiraId)
         {
             var carteira = _carteiraService.ObterCarteiraPorId(carteiraId);
             if (carteira == null)
@@ -36,56 +36,57 @@ namespace CarteiraDoInvestidor.Api.Controllers
             return Ok(carteira);
         }
 
-        // POST: api/Carteira
-        [HttpPost]
-        public ActionResult<CarteirasDto> Criar(CarteirasDto dto)
+        [HttpPut("{carteiraId}")]
+        public IActionResult AtualizarCarteira(Guid carteiraId, [FromBody] CarteirasDto carteiraDto)
         {
-            var novaCarteira = _carteiraService.Criar(dto);
-            return CreatedAtAction(nameof(ObterCarteiraPorId), new { carteiraId = novaCarteira.Id }, novaCarteira);
+            if (carteiraId != carteiraDto.Id)
+            {
+                return BadRequest("O Id da carteira na URL não corresponde ao Id na requisição.");
+            }
+
+            _carteiraService.AtualizarCarteira(carteiraDto);
+            return NoContent();
         }
 
-        /*// PUT: api/Carteira/{carteiraId}
-        [HttpPut("{carteiraId}")]
-        public IActionResult AtualizarCarteira(Guid carteiraId, CarteirasDto dto)
-        {
-            if (carteiraId != dto.Id)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                _carteiraService.AtualizarCarteira(dto);
-            }
-            catch (Exception)
-            {
-                if (!_carteiraService.CarteiraExiste(carteiraId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }*/
-
-        // DELETE: api/Carteira/{carteiraId}
         [HttpDelete("{carteiraId}")]
         public IActionResult DeletarCarteira(Guid carteiraId)
         {
-            var carteira = _carteiraService.ObterCarteiraPorId(carteiraId);
-            if (carteira == null)
-            {
-                return NotFound();
-            }
-
             _carteiraService.DeletarCarteira(carteiraId);
+            return NoContent();
+        }
+
+        [HttpPost("{carteiraId}/ativos")]
+        public IActionResult AdicionarAtivo(Guid carteiraId, [FromBody] AtivosDto novoAtivoDto)
+        {
+            _carteiraService.CriarAtivoAssociadoACarteira(carteiraId, novoAtivoDto);
+            return NoContent();
+        }
+
+        [HttpPut("{ativoId}/ativos")]
+        public IActionResult AtualizarAtivos(Guid ativoId, [FromBody] List<AtivosDto> novosAtivos)
+        {
+            _carteiraService.AtualizarAtivos(ativoId, novosAtivos);
+            return NoContent();
+        }
+
+        [HttpDelete("{carteiraId}/ativos")]
+        public IActionResult DeletarTodosAtivos(Guid carteiraId)
+        {
+            _carteiraService.DeletarTodosAtivos(carteiraId);
             return NoContent();
         }
     }
 }
+
+       /* [HttpPost]
+        public IActionResult Criar([FromBody] CarteirasDto dto)
+        {
+            if (ModelState is { IsValid: false })
+                return BadRequest();
+
+            var result = this._carteiraService.Criar(dto);
+
+            return Created($"/carteira/{result.Id}", result);
+        }*/
     
 

@@ -22,12 +22,27 @@ namespace CarteiraDoInvestidor.Application.Investimentos
             Mapper = mapper;
         }
 
+        public CarteirasDto Criar(CarteirasDto dto)
+        {
+            Carteiras carteiras = this.Mapper.Map<Carteiras>(dto);
+            this.CarteiraRepository.Save(carteiras);
+
+            return this.Mapper.Map<CarteirasDto>(carteiras);
+
+        }
 
         public CarteirasDto ObterCarteiraPorId(Guid carteiraId)
         {
             var carteira = CarteiraRepository.GetById(carteiraId);
             return Mapper.Map<CarteirasDto>(carteira);
         }
+
+/*        public CarteirasDto ObterAtivoPorId(Guid carteiraId, Guid ativoId)
+        {
+            var carteira = CarteiraRepository.GetByIdWithIncludes(carteiraId, c => c.ListaDeAtivos);
+            var ativo = carteira.ListaDeAtivos.FirstOrDefault(x => x.Id = ativoId);
+            return Mapper.Map<CarteirasDto>(carteira);
+        }*/
 
         public CarteirasDto ObterCarteiraseAtivos(Guid carteiraId)
         {
@@ -59,7 +74,7 @@ namespace CarteiraDoInvestidor.Application.Investimentos
 
         public void DeletarCarteira(Guid carteiraId)
         {
-            var carteira = CarteiraRepository.GetByIdWithIncludes(carteiraId, c => c.ListaDeAtivos);
+            var carteira = CarteiraRepository.GetById(carteiraId);
 
             CarteiraRepository.Delete(carteira);
         }
@@ -71,17 +86,11 @@ namespace CarteiraDoInvestidor.Application.Investimentos
             carteira.ListaDeAtivos.Add(novoAtivo);
             CarteiraRepository.Update(carteira);
         }
-        public CarteirasDto Criar(CarteirasDto dto)
-        {
-            Carteiras carteiras = this.Mapper.Map<Carteiras>(dto);
-            this.CarteiraRepository.Save(carteiras);
-            CarteirasDto savedDto = this.Mapper.Map<CarteirasDto>(carteiras);
-
-            return savedDto;
-        }
-
 
     }
 
+
 }
+
+
 

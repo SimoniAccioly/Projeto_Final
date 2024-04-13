@@ -16,6 +16,9 @@ namespace CarteiraDoInvestidor.Application.Investimentos.Dto
         public Guid CarteiraId { get; set; }
 
         [Required]
+        public Guid UsuarioId { get; set; }
+
+        [Required]
         public string NomeCarteira { get; set; }
 
         [Required]
@@ -23,9 +26,6 @@ namespace CarteiraDoInvestidor.Application.Investimentos.Dto
 
         [Required]
         public DateTime DataCriacao { get; set; }
-
-        [Required]
-        public virtual Usuario Usuario { get; set; }
 
         public List<AtivosDto> Ativos { get; set; } = new List<AtivosDto>();
     }

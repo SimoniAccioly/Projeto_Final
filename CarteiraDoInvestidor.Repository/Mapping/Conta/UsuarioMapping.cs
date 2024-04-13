@@ -24,7 +24,6 @@ namespace CarteiraDoInvestidor.Repository.Mapping.Conta
 
             builder.HasMany(x => x.Cartoes).WithOne();
             builder.HasMany(x => x.Assinaturas).WithOne();
-            builder.HasMany(x => x.Carteiras).WithOne(x => x.Usuario);
         }
     }
 }

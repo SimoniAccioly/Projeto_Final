@@ -17,7 +17,7 @@ namespace CarteiraDoInvestidor.Domain.Financeiro.Agreggates
         public virtual Usuario? UsuarioRemetente { get; set; }
         public TipoNotificacao TipoNotificacao { get; set; }
 
-
+        //exceção //exception
         public static Notificacao Criar(string titulo, string mensagem, TipoNotificacao tipoNotificacao, Usuario destino, Usuario remetente = null)
         {
             if (tipoNotificacao == TipoNotificacao.Usuario && remetente == null)

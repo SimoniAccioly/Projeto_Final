@@ -21,6 +21,8 @@ namespace CarteiraDoInvestidor.Repository.Mapping.Conta
             builder.Property(x => x.Descricao).IsRequired().HasMaxLength(150); ;
             builder.Property(x => x.DataCriacao).IsRequired();
             builder.HasMany(x => x.ListaDeAtivos).WithOne().OnDelete(DeleteBehavior.Cascade);
+            builder.Property(x => x.UsuarioId).IsRequired();
+            //builder.HasOne(x => x.Usuario);
 
         }
     }

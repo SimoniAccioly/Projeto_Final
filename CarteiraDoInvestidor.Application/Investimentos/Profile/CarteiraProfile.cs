@@ -14,6 +14,9 @@ namespace CarteiraDoInvestidor.Application.Investimentos.Profile
         {
             CreateMap<CarteirasDto, Carteiras>()
                 .ReverseMap();
+
+            CreateMap<AtivosDto, Ativos>()
+                .ReverseMap();
         }
     }
 }

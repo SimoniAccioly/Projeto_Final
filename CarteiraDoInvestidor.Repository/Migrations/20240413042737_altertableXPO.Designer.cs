@@ -4,6 +4,7 @@ using CarteiraDoInvestidor.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarteiraDoInvestidor.Repository.Migrations
 {
     [DbContext(typeof(CarteiraDoInvestidorContext))]
-    partial class CarteiraDoInvestidorContextModelSnapshot : ModelSnapshot
+    [Migration("20240413042737_altertableXPO")]
+    partial class altertableXPO
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,11 +287,13 @@ namespace CarteiraDoInvestidor.Repository.Migrations
 
             modelBuilder.Entity("CarteiraDoInvestidor.Domain.Carteira.Agreggates.Carteiras", b =>
                 {
-                    b.HasOne("CarteiraDoInvestidor.Domain.Conta.Agreggates.Usuario", null)
+                    b.HasOne("CarteiraDoInvestidor.Domain.Conta.Agreggates.Usuario", "Usuario")
                         .WithMany("Carteiras")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("CarteiraDoInvestidor.Domain.Financeiro.Agreggates.Assinatura", b =>

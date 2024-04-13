@@ -22,7 +22,7 @@ namespace CarteiraDoInvestidor.Repository
         public DbSet<Ativos> Ativos { get; set; }
         public DbSet<Plano> Planos { get; set; }
 
-    
+    //polimorfismo
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CarteiraDoInvestidorContext).Assembly);

@@ -13,11 +13,11 @@ namespace CarteiraDoInvestidor.Domain.Carteira.Agreggates
         public string NomeCarteira { get; set; }
         public string Descricao { get; set; }
         public DateTime DataCriacao { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Guid UsuarioId { get; set; }
         public virtual List<Ativos> ListaDeAtivos { get; set; } = new List<Ativos>();
 
-        /*public int QuantidadeAtivos()
-            => this.Ativos.Count;*/
+        public int QuantidadeAtivos()
+            => this.ListaDeAtivos.Count;
 
     }
 }

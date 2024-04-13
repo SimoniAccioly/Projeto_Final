@@ -13,6 +13,7 @@ using CarteiraDoInvestidor.Domain.Carteira.Agreggates;
 
 namespace CarteiraDoInvestidor.Domain.Conta.Agreggates
 {
+    //herança
     public class Usuario : Entity<Guid>
     {
         private const string NOME_CARTEIRA = "Carteira Padrão";
@@ -69,7 +70,7 @@ namespace CarteiraDoInvestidor.Domain.Conta.Agreggates
             });
 
         }
-
+        //expressão lambda
         private void DesativarAssinaturaAtiva()
         {
             //Caso tenha alguma assintura ativa, deseativa ela
@@ -87,7 +88,7 @@ namespace CarteiraDoInvestidor.Domain.Conta.Agreggates
                 NomeCarteira = nomeCarteira,
                 Descricao = descricao,
                 DataCriacao = DateTime.Now,
-                Usuario = this
+                UsuarioId = this.Id
             });
         }
 
